@@ -38,7 +38,7 @@ mongoose.Promise = Promise;
 
 mongoose.connect(MONGODB_URI);
 
-var scrape_db = mongojs(dbUrl, collections);
+var scrape_db = mongojs(MONGODB_URI, collections);
 scrape_db.on("error", function (req, res, error) {
     console.log("DB Error", error);
 });
