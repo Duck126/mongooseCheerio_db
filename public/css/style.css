@@ -1,0 +1,44 @@
+/* Custom Stylesheet */
+
+.icon-block {
+  padding: 0 15px;
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+h4.title {
+  margin-top: 10px;
+  font-family: 'Merriweather', serif;
+  font-weight: Bold;
+  color: gray;
+  cursor: pointer
+}
+
+h1.header {
+  font-family: 'Merriweather', serif;
+  color:gray;
+}
+
+#getnews {
+  font-family: 'Merriweather', serif;
+}
+
+.brand-logo {
+  font-family: 'Merriweather', serif;
+}
+
+p {
+  margin-top: 10px;
+  font-family: 'Merriweather', serif;
+}
+
+#commentadd {
+  margin-top: 10px;
+}
+
+#showCom {
+  margin-left: 25px;
+  margin-top: 10px;
+}

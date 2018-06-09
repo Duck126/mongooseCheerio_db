@@ -6,7 +6,7 @@ var cheerio = require("cheerio");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var logger = require("morgan");
-var axios = require("axios");
+//var axios = require("axios");
 
 //Port
 var PORT = 3001;
@@ -17,7 +17,8 @@ var app = express();
 //Database
 var dbUrl = "newsScrape";
 
-var collections = ["article", "comments", "users"];
+//Collections
+var collections = ["article", "comment", "users"];
 
 app.use(logger("dev"));
 
@@ -27,19 +28,50 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+
 mongoose.Promise = Promise;
 
-mongoose.connect("mongodb://localhost/newsScrape");
+//mongoose.connect("mongodb://localhost/newsScrape");
+
+mongoose.connect(MONGODB_URI);
 
 var scrape_db = mongojs(dbUrl, collections);
 scrape_db.on("error", function (req, res) {
     console.log("DB Error", error);
 });
 
+//Route to create/update comment on article.
+app.post("/article/:id", function (req, res) {
+    console.log(req.body);
+    var newcomment = {
+        comment: req.body.comm,
+        relationId: req.body.artId
+    };
+    scrape_db.comment.insert(newcomment, function (error, usercomment) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.json(usercomment);
+        }
+    });
+});
+
+//Route to creat/update comment on article.
+app.get("/articles/:id", function (req, res) {
+    console.log(req);
+    scrape_db.article.find({'relationId': req.params.id}).populate("comment").then(function (currentArticle) {
+        console.log(currentArticle);
+        res.json(currentArticle);
+    }).catch(function (err) {
+        res.json(err);
+    });
+});
+
 //Route to pull from article collection.
 app.get("/news", function (req, res) {
-    scrape_db.article.find({}, function(error, news) {
-        if(error) {
+    scrape_db.article.find({}, function (error, news) {
+        if (error) {
             console.log(error);
         } else {
             res.json(news);
