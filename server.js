@@ -43,7 +43,7 @@ scrape_db.on("error", function (req, res) {
     console.log("DB Error", error);
 });
 
-app.get("/home", function(req, res){
+app.get("/", function(req, res){
     res.render("index");
 });
 
