@@ -17,7 +17,7 @@ var app = express();
 
 //Database
 var dbUrl = "newsScrape";
-
+app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -30,9 +30,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static("public"));
-
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_PINK_URI || "mongodb://localhost/mongoHeadlines";
 
 mongoose.Promise = Promise;
 
@@ -46,8 +44,8 @@ scrape_db.on("error", function (req, res) {
 });
 
 app.get("/", function(req, res){
-    res.render
-})
+    res.render("index");
+});
 
 //Route to create/update comment on article.
 app.post("/article/:id", function (req, res) {
