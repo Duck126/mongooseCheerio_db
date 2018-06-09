@@ -6,6 +6,7 @@ var cheerio = require("cheerio");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var logger = require("morgan");
+var exphbs = require("express-handlebars");
 //var axios = require("axios");
 
 //Port
@@ -16,6 +17,9 @@ var app = express();
 
 //Database
 var dbUrl = "newsScrape";
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 //Collections
 var collections = ["article", "comment", "users"];
@@ -40,6 +44,10 @@ var scrape_db = mongojs(dbUrl, collections);
 scrape_db.on("error", function (req, res) {
     console.log("DB Error", error);
 });
+
+app.get("/", function(req, res){
+    res.render
+})
 
 //Route to create/update comment on article.
 app.post("/article/:id", function (req, res) {
