@@ -139,6 +139,6 @@ app.get("/getnews", function (req, res) {
 });
 
 //App listening on PORT: 3001.
-app.listen(3001, function () {
+app.listen( PORT, function () {
     console.log("App is up on port " + PORT);
 });
