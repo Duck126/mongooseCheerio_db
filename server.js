@@ -9,7 +9,7 @@ var logger = require("morgan");
 //var axios = require("axios");
 
 //Port
-var PORT = 3001;
+var PORT = process.env.PORT || 3001;
 
 //Setup app to use express
 var app = express();
