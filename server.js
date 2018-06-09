@@ -17,7 +17,7 @@ var app = express();
 
 //Database
 var dbUrl = "newsScrape";
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
@@ -43,7 +43,7 @@ scrape_db.on("error", function (req, res) {
     console.log("DB Error", error);
 });
 
-app.get("/", function(req, res){
+app.get("/home", function(req, res){
     res.render("index");
 });
 
