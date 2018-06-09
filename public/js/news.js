@@ -36,7 +36,7 @@ $(document).ready(function () {
 $(document).on("click", "#showCom", function () {
 
     var Id = $(this).attr("data-id");
-
+        console.log(Id);
     $.ajax({
         method: "GET",
         url: "/article/" + Id
@@ -53,7 +53,7 @@ $(document).on("click", "#commentadd", function () {
     $("#commentText").empty();
 
     var Id = $(this).attr("data-id");
-        console.log(Id);
+        
     $("#modal1").on("click", "#submitbtn", function (Id) {
         $.ajax({
                 method: "POST",
